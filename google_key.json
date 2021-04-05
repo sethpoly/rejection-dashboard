@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rejection-automation",
+  "private_key_id": "1c0591efc8d54b126184e746de740b040ac9ace5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbMkbM0S5i5YST\nS0kJK3WHMA9OwHMCieYCZ6pveLRsGggz0714WeaDq73kQp4CeJq8ZRSHJv1pNOD0\nNY91il6IAibpUTb3h513usScBBAUOt8P5nx2MpepIOtyylCY2bFg2+S8jqHom0oa\nvuf2l7Sm05TvAO0oIxEYhCF5Oce8LweC+YCoGH69mUnFgrG9kyON5lcgA/otNeCa\nY32xc5iF4xofjrxdgoGrfjPvhERi93NnS7I3ezrwA0YC2KC24ejg0P1WF9BwipAD\nfS0r4oFk3sacCe29GDKkZ+C4400Tlkdxa2Hmi01vH/LNcQCdghEmGGWxQMc2iEZH\nqkxppZkpAgMBAAECggEAE/2AUSKMnplRn2tAxGonDvFWRreCEEu04yhCy2Vl3Zam\n2S8o0DvcAXXIB3P/MWOAB8lszKyaH3Oim7LyG+VGx2mcKdrDGWJP/UDWYxIdyJ0x\nME6JWvA0k53nIHIMqqaZKNJfsxs2RIk7rLfCCOOp+9g/n2e6uSva3cetvn6uAAkw\nsK30eyzOxLv8jWxpD60M8ZVYvYvNMSnf7pcH4MyTUtGrC+GJ69Tz5FCra38zVPzc\nieUpmYWs1VSJqCIs2sOxYVcjD0KvGPKpr8OpPpzrmDRU4VBbPAJE+tTp0TmQRM6i\nshUnouB86oL9vbbnKb/6jPFw4wHbOpanParOzJnspwKBgQD5y+0dizJu6K7nStzS\nV7YakNIUNLCUYsUPOVQ39cRLiAp4xtA9GrzcUH3E3VbYY7tL8zMdT8trM22AdJNC\nO8FEjH+o6ePC7Mz1xwj5M3iOM6yMQa6hmm7X3nqfQ/FxOwx5BUqj213Fk8j6TQWz\nu3oTuJd8mqIAqMcJrRiUvCPl9wKBgQDgo8+CQNurnCxw2mS396FfQPSb4tCOk1Wb\nufO37j//FalDhzEcH9y5CiOpCXwIe6O2tzgxIlcyuno+2xyZwYbu07/a4k1hN5Ek\n6kevlDynQLRelvt+jB76oAoNyc6qVmlYvwr5a/rnqjrIlc69e1l+XNlxyf9fh97X\nStIsjIQx3wKBgAjlaFZrBKrKgqAeHGspUIT1r2Wk0r0WH2qBYix0Bj+iYq0Wd4gV\nkbBO9YuzTkp6kssLqEBc/SOeO0Id5LixJBrq3gkH+2KPyGTgZ8NoP9zgnj6IgE2l\nEFmDxN4zL0AXGESfGZ9oSpikwL2ZTKCwBpL5OfvoDej0GdKQZZW2dZjVAoGBAKxJ\n9uUXiWNdLFiBp63RJts/nlvQ4dP3/DirrdjryfmCS4eXMHs5lLf2ptMGizKWYUHJ\n1Dca93XYv9llg9IJM8wIa6Uc2+wsCg4eAU0QjFRas/u4ILs2DKx8AjoBBZhvHe0K\n2QfjYVQ8o0kkXKPG7ySTYdJ78nj6ZFcK85dnThxRAoGADyTX6thkpQe3JEMlEIWB\nIjeRnPqVCDqxJaZZho5kAcHY37TWFBPlvafO0c3/qBkb5KILbUUj/G4XXxGJdc+Z\nOp6tq6f23vsCFR04iHfihOs9wjBDFXoFV5BKWIZnAglov67MRg92pVb8nBgBRrsk\npAh4wTKifz2SUK9zQvAKlDg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "resume-manager-account@rejection-automation.iam.gserviceaccount.com",
+  "client_id": "107289155857107287731",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/resume-manager-account%40rejection-automation.iam.gserviceaccount.com"
+}
