@@ -13,6 +13,9 @@ rows = data.get_all_records()
 df = pd.DataFrame(rows)
 df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True)
 
+# Drop null values from df
+df = df[df.dateApplied.notnull()]
+
 # Init Dash app
 app = dash.Dash(__name__)
 
