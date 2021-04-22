@@ -19,6 +19,13 @@ df = df[df.dateApplied.notnull()]
 # Init Dash app
 app = dash.Dash(__name__)
 
+
+colors = {
+    'background': '#111111',
+    'text': '#7FDBFF'
+}
+
+
 fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  size_max=60,
                  labels={
@@ -27,12 +34,18 @@ fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied'])
                  },
                  title="Applications Sent Per Day")
 
+fig.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background'],
+    font_color=colors['text']
+)
+
 # Define layout property of app
 app.layout = html.Div(
     children=[
         html.H1(children="Rejection Analytics", ),
         html.P(
-            children="Analyze the responses of every job I've ever applied to",
+            children="Analyze the responses of every job I've ever applied to"
         ),
         dcc.Graph(
             figure=fig
