@@ -24,6 +24,10 @@ colors = {
     'text': '#7FDBFF'
 }
 
+# Get data for Apps Sent/Rejection containers
+app_count = len(df.index)
+rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
+
 fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  size_max=60,
                  labels={
@@ -59,7 +63,7 @@ app.layout = html.Div([
                 children=[
                     html.H3(
                         children="Applications Sent", className="container-title"),
-                    html.P('#', className="container-value")
+                    html.P(app_count, className="container-value")
                 ]
             ),
             html.Div(
@@ -67,7 +71,7 @@ app.layout = html.Div([
                 children=[
                     html.H3(
                         children="Rejections Received", className="container-title"),
-                    html.P('344', className="container-value")
+                    html.P(rejection_count, className="container-value", style={'color':'red'})
                 ]
             )
         ]
