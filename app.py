@@ -76,9 +76,14 @@ app.layout = html.Div([
             )
         ]
     ),
-
-    dcc.Graph(
-        figure=fig
+    html.Div(
+        children=[
+            dcc.Graph(
+                id="apps_per_day_graph",
+                figure=fig,
+                className="graph-container"
+            )
+        ]
     )
 ])
 

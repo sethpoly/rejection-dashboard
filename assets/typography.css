@@ -45,3 +45,10 @@ body {
 
     color: #4dff00;
 }
+.graph-container{
+    display: inline-block;
+    width: 50%;
+
+}
+
+
