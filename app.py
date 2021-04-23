@@ -27,6 +27,8 @@ colors = {
 # Get data for Apps Sent/Rejection containers
 app_count = len(df.index)
 rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
+response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
+response_rate = "{:.2%}".format(response_rate)  # Convert to percent
 
 fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  size_max=60,
@@ -71,7 +73,15 @@ app.layout = html.Div([
                 children=[
                     html.H3(
                         children="Rejections Received", className="container-title"),
-                    html.P(rejection_count, className="container-value", style={'color':'red'})
+                    html.P(rejection_count, className="container-value", style={'color': 'red'})
+                ]
+            ),
+            html.Div(
+                className="container",
+                children=[
+                    html.H3(
+                        children="Response Rate", className="container-title"),
+                    html.P(response_rate, className="container-value", style={'color': 'red'})
                 ]
             )
         ]
