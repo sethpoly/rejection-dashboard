@@ -4,7 +4,7 @@ body {
     font-family: Arial;
 }
 .app-header{
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 
 
@@ -33,15 +33,17 @@ body {
     max-width: 50%;
     margin-left: 10px;
     padding: 25px;
-    border-radius: 10px;
 
-    background-color: #111111;
+    background-color: #1f1f1f;
 }
 .container-title{
     color: #FFF;
 }
 .container-value{
-    font-size: 24px;
+    font-size: 48px;
+    outline: solid;
+    outline-offset: 0px;
+    margin-top: -5px;
 
     color: #4dff00;
 }
