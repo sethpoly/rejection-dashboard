@@ -4,6 +4,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+from dash.dependencies import Input, Output
 
 # Connect to sheets API and retrieve latest sheet
 data = acc.Spreadsheet('Applications', 'Main').sheet
@@ -30,6 +32,7 @@ rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
 
+# Scatter plot for number of applications sent per day
 fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  size_max=60,
                  labels={
@@ -39,6 +42,18 @@ fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied'])
                  title="Applications Sent Per Day")
 
 fig.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background'],
+    font_color=colors['text']
+)
+
+# Pie chart with job portals
+portal_names = df['applicationPortal'].unique()
+portal_names.sort()
+fig_pie = px.pie(df, values=df.groupby(['applicationPortal']).size(), names=portal_names
+                 , title="Job Boards Used")
+
+fig_pie.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
     font_color=colors['text']
@@ -98,12 +113,17 @@ app.layout = html.Div([
                         className="graph-container"
                     )
                 ]
+            ),
+            html.Div(
+                children=[
+                    dcc.Graph(
+                        id="job_boards_pie",
+                        figure=fig_pie,
+                        className="graph-container"
+                    )
+                ]
             )
-        ]
-    )
-
-
-])
+        ])])
 
 if __name__ == "__main__":
     app.run_server(debug=True)
