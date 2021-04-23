@@ -25,12 +25,13 @@ body {
     margin: 0 auto;
     margin-bottom: 25px;
     margin-top: 25px;
+    float: left;
+    display: block;
 
     text-align: center;
 }
 .container{
-    display: inline-block;
-    max-width: 50%;
+    max-width: 200px;
     margin-left: 10px;
     padding: 25px;
 
@@ -38,6 +39,8 @@ body {
 }
 .container-title{
     color: #FFF;
+    font-size: 16px;
+    text-align: left;
 }
 .container-value{
     font-size: 48px;
