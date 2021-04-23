@@ -20,8 +20,8 @@ df = df[df.dateApplied.notnull()]
 app = dash.Dash(__name__)
 
 colors = {
-    'background': '#111111',
-    'text': '#7FDBFF'
+    'background': '#1f1f1f',
+    'text': '#FFF'
 }
 
 # Get data for Apps Sent/Rejection containers
@@ -56,45 +56,53 @@ app.layout = html.Div([
             )
         ]
     ),
-    # Double boxes with Applications Sent & Rejection data
+    # Boxes with Applications Sent & Rejection data
     html.Div(
-        className="container-div",
+        className="dashboard-container",
         children=[
             html.Div(
-                className="container",
+                className="container-div",
                 children=[
-                    html.H3(
-                        children="Applications Sent", className="container-title"),
-                    html.P(app_count, className="container-value")
+                    html.Div(
+                        className="container",
+                        children=[
+                            html.H3(
+                                children="Applications Sent", className="container-title"),
+                            html.P(app_count, className="container-value")
+                        ]
+                    ),
+                    html.Div(
+                        className="container",
+                        children=[
+                            html.H3(
+                                children="Rejections Received", className="container-title"),
+                            html.P(rejection_count, className="container-value", style={'color': 'red'})
+                        ]
+                    ),
+                    html.Div(
+                        className="container",
+                        children=[
+                            html.H3(
+                                children="Response Rate", className="container-title"),
+                            html.P(response_rate, className="container-value", style={'color': 'red'})
+                        ]
+                    )
                 ]
+
             ),
             html.Div(
-                className="container",
                 children=[
-                    html.H3(
-                        children="Rejections Received", className="container-title"),
-                    html.P(rejection_count, className="container-value", style={'color': 'red'})
+                    dcc.Graph(
+                        id="apps_per_day_graph",
+                        figure=fig,
+                        className="graph-container"
+                    )
                 ]
-            ),
-            html.Div(
-                className="container",
-                children=[
-                    html.H3(
-                        children="Response Rate", className="container-title"),
-                    html.P(response_rate, className="container-value", style={'color': 'red'})
-                ]
-            )
-        ]
-    ),
-    html.Div(
-        children=[
-            dcc.Graph(
-                id="apps_per_day_graph",
-                figure=fig,
-                className="graph-container"
             )
         ]
     )
+
+
 ])
 
 if __name__ == "__main__":

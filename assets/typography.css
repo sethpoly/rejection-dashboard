@@ -1,13 +1,10 @@
 body {
     background-color: #333;
-
     font-family: Arial;
 }
 .app-header{
     width: 90%;
     margin: 0 auto;
-
-
     color: #FFFFFF;
 }
 .title{
@@ -20,19 +17,23 @@ body {
     color: #cccac9;
     font-size: 15px;
 }
+
+
+.dashboard-container{
+    width: 90%;
+    height: 800px;
+    margin: 0 auto;
+    background-color: red;
+}
 .container-div{
-    width: 80%;
+    float: left;
     margin: 0 auto;
     margin-bottom: 25px;
-    margin-top: 25px;
-    float: left;
-    display: block;
 
     text-align: center;
 }
 .container{
     max-width: 200px;
-    margin-left: 10px;
     padding: 25px;
 
     background-color: #1f1f1f;
@@ -51,9 +52,9 @@ body {
     color: #4dff00;
 }
 .graph-container{
-    display: inline-block;
-    width: 50%;
-
+    width: 500px;
+    padding-left: 15px;
+    overflow: hidden;
 }
 
 
