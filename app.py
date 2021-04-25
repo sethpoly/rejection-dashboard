@@ -59,6 +59,9 @@ fig_pie.update_layout(
     font_color=colors['text']
 )
 
+# Bar chart for correlation between Coverletter/Days Unanswered/Rejections
+fig_bar = px.bar(df, x="withCoverLetter", y="daysUnanswered", color="wasRejected")
+
 # Define layout property of app
 app.layout = html.Div([
     html.Div(
@@ -119,6 +122,15 @@ app.layout = html.Div([
                     dcc.Graph(
                         id="job_boards_pie",
                         figure=fig_pie,
+                        className="graph-container"
+                    )
+                ]
+            ),
+            html.Div(
+                children=[
+                    dcc.Graph(
+                        id="rejection_bar",
+                        figure=fig_bar,
                         className="graph-container"
                     )
                 ]
