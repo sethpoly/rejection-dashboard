@@ -98,7 +98,7 @@ app.layout = html.Div([
                         className="container",
                         children=[
                             html.H3(
-                                children="Response Rate", className="container-title"),
+                                children="Interview Rate", className="container-title"),
                             html.P(response_rate, className="container-value", style={'color': 'red'})
                         ]
                     )
