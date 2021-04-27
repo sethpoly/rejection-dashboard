@@ -60,11 +60,29 @@ fig_pie.update_layout(
 )
 
 # Bar chart for correlation between Coverletter/Rejections
-fig_bar = px.bar(df, x=df["withCoverLetter"].unique(), y=df.groupby(['withCoverLetter']).size(),
+#
+# total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
+# coverletter_total = df[df["withCoverLetter"] == 'TRUE'].shape[0]
+# coverletter_true = df_coverletter[df["withCoverLetter"] == 'TRUE'].shape[0]
+# print(f'Total apps sent with cover letters: {coverletter_total}')
+# print(f'With cover letter & passed screening: {coverletter_true}')
+
+df_passed_screening = df[df["initialScreeningRejection"] == 'FALSE']
+dfg = df_passed_screening.groupby('withCoverLetter').count().reset_index()
+print(df_passed_screening)
+# coverletter_ratio = df_coverletter.shape[0] / df[df["withCoverLetter"] == 'TRUE'].shape[0]
+# print(f'Cover letter Ratio: {coverletter_ratio}')
+fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color="withCoverLetter",
+                 title="Does a Cover Letter Actually Help?",
                  labels={
-                     "x":"With Cover Letter",
-                     "y":"Applications Sent"
+                     "withCoverLetter": "Cover Letter Attached",
+                     "initialScreeningRejection": "Interviews Received"
                  })
+fig_bar.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background'],
+    font_color=colors['text']
+)
 
 # Define layout property of app
 app.layout = html.Div([
