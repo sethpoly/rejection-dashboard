@@ -59,8 +59,12 @@ fig_pie.update_layout(
     font_color=colors['text']
 )
 
-# Bar chart for correlation between Coverletter/Days Unanswered/Rejections
-fig_bar = px.bar(df, x="withCoverLetter", y="daysUnanswered", color="wasRejected")
+# Bar chart for correlation between Coverletter/Rejections
+fig_bar = px.bar(df, x=df["withCoverLetter"].unique(), y=df.groupby(['withCoverLetter']).size(),
+                 labels={
+                     "x":"With Cover Letter",
+                     "y":"Applications Sent"
+                 })
 
 # Define layout property of app
 app.layout = html.Div([
