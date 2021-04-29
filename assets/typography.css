@@ -51,10 +51,37 @@ body {
 
     color: #4dff00;
 }
-.graph-container{
+.graph-cards{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+}
+.graph-div{
     width: 500px;
     padding-left: 15px;
     overflow: hidden;
+}
+
+@media (min-width: 600px) {
+    .graph-cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .container-div{
+        display: block;
+        float: none;
+    }
+    .container{
+        width: 90%;
+        max-width: 500px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    .container-value{
+        font-size: 24px;
+    }
 }
 
 

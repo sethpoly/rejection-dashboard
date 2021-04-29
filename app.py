@@ -131,32 +131,38 @@ app.layout = html.Div([
 
             ),
             html.Div(
+                className="graph-cards",
                 children=[
-                    dcc.Graph(
-                        id="apps_per_day_graph",
-                        figure=fig,
-                        className="graph-container"
-                    )
-                ]
-            ),
-            html.Div(
-                children=[
-                    dcc.Graph(
-                        id="job_boards_pie",
-                        figure=fig_pie,
-                        className="graph-container"
-                    )
-                ]
-            ),
-            html.Div(
-                children=[
-                    dcc.Graph(
-                        id="rejection_bar",
-                        figure=fig_bar,
-                        className="graph-container"
+                    html.Div(
+                        children=[
+                            dcc.Graph(
+                                id="apps_per_day_graph",
+                                figure=fig,
+                                className="graph-div"
+                            )
+                        ]
+                    ),
+                    html.Div(
+                        children=[
+                            dcc.Graph(
+                                id="job_boards_pie",
+                                figure=fig_pie,
+                                className="graph-div"
+                            )
+                        ]
+                    ),
+                    html.Div(
+                        children=[
+                            dcc.Graph(
+                                id="rejection_bar",
+                                figure=fig_bar,
+                                className="graph-div"
+                            )
+                        ]
                     )
                 ]
             )
+
         ])])
 
 if __name__ == "__main__":
