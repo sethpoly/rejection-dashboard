@@ -73,7 +73,7 @@ print(df_passed_screening)
 # coverletter_ratio = df_coverletter.shape[0] / df[df["withCoverLetter"] == 'TRUE'].shape[0]
 # print(f'Cover letter Ratio: {coverletter_ratio}')
 fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color="withCoverLetter",
-                 title="Does a Cover Letter Actually Help?",
+                 title="Applications With Cover Letter",
                  labels={
                      "withCoverLetter": "Cover Letter Attached",
                      "initialScreeningRejection": "Interviews Received"
