@@ -7,6 +7,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 
+# Init Dash app
+app = dash.Dash(__name__)
+
 # Connect to sheets API and retrieve latest sheet
 data = acc.Spreadsheet('Applications', 'Main').sheet
 
@@ -17,9 +20,6 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
-
-# Init Dash app
-app = dash.Dash(__name__)
 
 colors = {
     'background': '#1f1f1f',
@@ -37,7 +37,7 @@ fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied'])
                  size_max=60,
                  labels={
                      "x": "Date Applied",
-                     "y": "Applications Sent"
+                     "y": "Applications Per Day"
                  },
                  title="Applications Sent Per Day")
 
