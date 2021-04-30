@@ -163,7 +163,15 @@ app.layout = html.Div([
                 ]
             )
 
-        ])])
+        ]),
+    # Contact page at bottom of page
+    html.Div(
+        className="div-contact",
+        children=[
+            html.H3(className="copyright-title", children="Seth Polyniak\u00A9  Copyright")
+        ]
+    )
+])
 
 if __name__ == "__main__":
     app.run_server(debug=True)
