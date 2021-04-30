@@ -1,6 +1,7 @@
 body {
     background-color: #333;
     font-family: Arial;
+    min-height: 2000px;
 }
 .app-header{
     width: 90%;
@@ -19,8 +20,9 @@ body {
 }
 .dashboard-container{
     width: 90%;
-    height: 800px;
+    height: auto;
     margin: 0 auto;
+    margin-bottom: 75px;
 }
 .container-div{
     float: left;
@@ -59,6 +61,12 @@ body {
 .graph-div{
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 350px);
+}
+.div-contact{
+    width: 100%;
+    height: 150px;
+    bottom: 0px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 700px){
