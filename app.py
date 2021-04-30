@@ -168,7 +168,12 @@ app.layout = html.Div([
     html.Div(
         className="div-contact",
         children=[
-            html.H3(className="copyright-title", children="Seth Polyniak\u00A9  Copyright")
+            html.H3(className="copyright-title", children="Seth Polyniak\u00A9 2021"),
+            html.Ul(className="social-list", children=[
+                html.A("//Github", className="social-link", href="https://github.com/sethpoly", target="_blank"),
+                html.A("//LinkedIn", className="social-link", href="https://www.linkedin.com/in/sethpolyniak/", target="_blank"),
+                html.A("//Portfolio", className="social-link", href="https://sethpoly.com", target="_blank")
+            ])
         ]
     )
 ])
