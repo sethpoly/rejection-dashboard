@@ -72,13 +72,16 @@ body {
     text-align: center;
 }
 .copyright-title{
+    padding-left: 30px;
+    margin-bottom: 0;
     color: #cccac9;
     font-size: 17px;
 }
 .social-list{
-
+    display: inline-block;
 }
 .social-link{
+    padding: 8px;
 
     text-decoration: None;
     color: #FFF;
