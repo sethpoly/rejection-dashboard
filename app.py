@@ -8,7 +8,9 @@ import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 
 # Init Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(__name__,
+                meta_tags=
+                [{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 
 # Connect to sheets API and retrieve latest sheet
 data = acc.Spreadsheet('Applications', 'Main').sheet
@@ -171,7 +173,8 @@ app.layout = html.Div([
             html.H3(className="copyright-title", children="Seth Polyniak\u00A9 2021"),
             html.Ul(className="social-list", children=[
                 html.A("//Github", className="social-link", href="https://github.com/sethpoly", target="_blank"),
-                html.A("//LinkedIn", className="social-link", href="https://www.linkedin.com/in/sethpolyniak/", target="_blank"),
+                html.A("//LinkedIn", className="social-link", href="https://www.linkedin.com/in/sethpolyniak/",
+                       target="_blank"),
                 html.A("//Portfolio", className="social-link", href="https://sethpoly.com", target="_blank")
             ])
         ]
