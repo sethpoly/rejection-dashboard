@@ -225,7 +225,7 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
             dff, x=df_passed_screening.groupby('applicationPortal').size(), y=portal_names, color=portal_names,
             title="Job Boards Used",
             labels={
-                'x': "Interviews Recieved",
+                'x': "Interviews Received",
                 'y': 'Job Board',
                 'color': ''
             })
