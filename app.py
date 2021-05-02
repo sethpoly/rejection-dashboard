@@ -143,15 +143,15 @@ app.layout = html.Div([
                             ),
                         ]
                     ),
-                    html.Div(
-                        children=[
-                            dcc.Graph(
-                                id="job_boards_pie",
-                                figure=fig_pie,
-                                className="graph-div"
-                            )
-                        ]
-                    ),
+                    # html.Div(
+                    #     children=[
+                    #         dcc.Graph(
+                    #             id="job_boards_pie",
+                    #             figure=fig_pie,
+                    #             className="graph-div"
+                    #         )
+                    #     ]
+                    # ),
                     html.Div(
                         className="graph-div",
                         children=[
