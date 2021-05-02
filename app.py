@@ -160,7 +160,10 @@ app.layout = html.Div([
                                 options=[{'label': 'Interviews Received', 'value': 'initialScreeningRejection'},
                                          {'label': 'Applications Sent', 'value': 'applicationPortal'}],
                                 value='applicationPortal',
-                                clearable=False
+                                clearable=False,
+                                style={
+                                    # 'background-color':colors['background'],
+                                }
                             ),
                             dcc.Graph(
                                 id="new_bar"

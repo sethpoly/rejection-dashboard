@@ -61,6 +61,14 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 350px);
 }
+/*Dropdown for interactive graphs
+Can't update text color of dropdown still*/
+input{
+    color: #000; /*Does not work*/
+}
+.coverletter_dropdown, .VirtualizedSelectFocusedOption:hover{
+    cursor: pointer;
+}
 
 
 
