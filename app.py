@@ -4,6 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+from dash.dependencies import Output, Input
 
 # Init Dash app
 app = dash.Dash(__name__,
@@ -139,7 +140,7 @@ app.layout = html.Div([
                                 id="apps_per_day_graph",
                                 figure=fig,
                                 className="graph-div"
-                            )
+                            ),
                         ]
                     ),
                     html.Div(
@@ -150,6 +151,22 @@ app.layout = html.Div([
                                 className="graph-div"
                             )
                         ]
+                    ),
+                    html.Div(
+                        className="graph-div",
+                        children=[
+                            dcc.Dropdown(
+                                id="coverletter_dropdown",
+                                options=[{'label': 'Interviews Received', 'value': 'initialScreeningRejection'},
+                                         {'label': 'Applications Sent', 'value': 'applicationPortal'}],
+                                value='applicationPortal',
+                                clearable=False
+                            ),
+                            dcc.Graph(
+                                id="new_bar"
+                            )
+                        ]
+
                     ),
                     html.Div(
                         children=[
@@ -178,6 +195,46 @@ app.layout = html.Div([
         ]
     )
 ])
+
+print(df.groupby(["applicationPortal", "initialScreeningRejection"]))
+
+
+# Callback for job board dropdown
+@app.callback(
+    Output('new_bar', 'figure'),
+    Input('coverletter_dropdown', 'value')
+)
+def build_graph(coverletter_dropdown):  # Param refers to inputs
+    dff = df  # Make a copy of df CRUD reasons
+
+    if coverletter_dropdown == "applicationPortal":
+        chart = px.bar(
+            dff, x=dff.groupby([coverletter_dropdown]).size(), y=portal_names, color=portal_names,
+            title="Job Boards Used",
+            labels={
+                'x': "Applications Sent",
+                'y': 'Job Board',
+                'color': ''
+            }
+        )
+    elif coverletter_dropdown == "initialScreeningRejection":
+        chart = px.bar(
+            dff, x=df_passed_screening.groupby('applicationPortal').size(), y=portal_names, color=portal_names,
+            title="Job Boards Used",
+            labels={
+                'x': "Interviews Recieved",
+                'y': 'Job Board',
+                'color': ''
+            })
+
+    chart.update_layout(
+        plot_bgcolor=colors['background'],
+        paper_bgcolor=colors['background'],
+        font_color=colors['text']
+    )
+
+    return chart
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
