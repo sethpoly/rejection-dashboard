@@ -2,9 +2,13 @@ body {
     background-color: #333;
     font-family: Arial;
 }
-.app-header{
+.header-div{
     width: 90%;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.app-header{
     color: #FFFFFF;
 }
 .title{
@@ -16,6 +20,19 @@ body {
 
     color: #cccac9;
     font-size: 15px;
+}
+#refresh-btn{
+    width: 64px;
+    height: 64px;
+    margin-top: 5px;
+
+    background: url(refresh.svg) no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    filter: invert(86%) sepia(0%) saturate(1330%) hue-rotate(16deg) brightness(96%) contrast(94%);
+ }
+#refresh-btn:hover{
+    cursor: pointer;
 }
 .dashboard-container{
     width: 90%;
@@ -102,6 +119,19 @@ input{
 
 /*Responsive design*/
 @media only screen and (max-width: 700px){
+    /*HEADER CONTENT*/
+    .title{
+        font-size: 18px;
+    }
+    .sub-title{
+        font-size: 13px;
+    }
+    #refresh-btn{
+        width: 48px;
+        height: 48px;
+    }
+
+    /*GRAPH CONTENT*/
     .container-div{
         display: block;
         float: none;

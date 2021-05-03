@@ -88,14 +88,20 @@ fig_bar.update_layout(
 # Define layout property of app
 app.layout = html.Div([
     html.Div(
-        className="app-header",
+        className="header-div",
         children=[
-            html.H1(
-                children="JOB REJECTION DASHBOARD", className="title"),
-            html.H3(
-                children="Analyze the responses of every job I've applied to", className="sub-title"
-            )
-        ]
+            html.Div(
+                className="app-header",
+                children=[
+                    html.H1(
+                        children="JOB REJECTION DASHBOARD", className="title"),
+                    html.H3(
+                        children="Analyze the responses of every job I've applied to", className="sub-title"
+                    )
+
+                ]
+            ),
+            html.Button(id="refresh-btn", )]
     ),
     # Boxes with Applications Sent & Rejection data
     html.Div(
