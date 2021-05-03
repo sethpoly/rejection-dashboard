@@ -89,7 +89,16 @@ input{
 }
 
 
-
+/*Data table*/
+.data-header{
+    color: #FFF;
+    margin-bottom: 5px;
+}
+.table-div{
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
 /*Contact div at bottom*/
 .div-contact{
     width: 100%;
@@ -152,5 +161,13 @@ input{
     .graph-div{
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(4, 100%);
+    }
+
+    /*DATA TABLE*/
+    .data-header{
+        font-size: 18px;
+    }
+    .table-div{
+        width: 90%;
     }
 }

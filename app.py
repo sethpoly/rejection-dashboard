@@ -6,6 +6,7 @@ import dash_table
 import pandas as pd
 import plotly.express as px
 from dash.dependencies import Output, Input
+from datetime import datetime
 
 # Init Dash app
 app = dash.Dash(__name__,
@@ -22,6 +23,11 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
+
+# Data frame for most recent rejections
+df_recent_rejects = df[(df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] > 0) & (df['daysSinceRejection'] < 10)]
+df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
+print(df_recent_rejects.head())
 
 colors = {
     'background': '#1f1f1f',
@@ -71,7 +77,6 @@ fig_pie.update_layout(
 
 df_passed_screening = df[df["initialScreeningRejection"] == 'FALSE']
 dfg = df_passed_screening.groupby('withCoverLetter').count().reset_index()
-print(df_passed_screening)
 # coverletter_ratio = df_coverletter.shape[0] / df[df["withCoverLetter"] == 'TRUE'].shape[0]
 # print(f'Cover letter Ratio: {coverletter_ratio}')
 fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color="withCoverLetter",
@@ -118,7 +123,7 @@ def serve_layout():
                             children=[
                                 html.H3(
                                     children="Applications Sent", className="container-title"),
-                                html.P(app_count,className="container-value")
+                                html.P(app_count, className="container-value")
                             ]
                         ),
                         html.Div(
@@ -181,6 +186,31 @@ def serve_layout():
                 )
 
             ]),
+        html.Div(
+            className='table-div',
+            children=[
+                html.H1(className="data-header", children="Recent Rejections"),
+                dash_table.DataTable(
+                    id='reject_table',
+                    data=df_recent_rejects.to_dict('records'),
+                    columns=[
+                        {"name": "Company", "id": "Company"},
+                        {"name": 'dateRejected', "id": 'dateRejected'},
+                        {"name": "withCoverLetter", "id": "withCoverLetter"}
+                    ],
+                    style_as_list_view=True,
+                    style_header={'backgroundColor': 'rgb(30, 30, 30)',
+                                  'border': '1px solid gray'},
+                    style_data={
+                        'border': '1px solid gray'
+                    },
+                    style_cell={
+                        'backgroundColor': '#1f1f1f',
+                        'color': 'white'
+
+                    },
+                    editable=False
+                )]),
 
         # Contact page at bottom of page
         html.Div(
@@ -199,6 +229,7 @@ def serve_layout():
 
 
 app.layout = serve_layout
+
 
 # Callback for job board dropdown
 @app.callback(
