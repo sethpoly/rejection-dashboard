@@ -22,6 +22,7 @@ body {
     font-size: 15px;
 }
 #refresh-btn{
+    display: none;
     width: 64px;
     height: 64px;
     margin-top: 5px;

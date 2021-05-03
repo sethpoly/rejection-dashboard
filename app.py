@@ -85,128 +85,119 @@ fig_bar.update_layout(
     font_color=colors['text']
 )
 
+
 # Define layout property of app
-app.layout = html.Div([
-    html.Div(
-        className="header-div",
-        children=[
-            html.Div(
-                className="app-header",
-                children=[
-                    html.H1(
-                        children="JOB REJECTION DASHBOARD", className="title"),
-                    html.H3(
-                        children="Analyze the responses of every job I've applied to", className="sub-title"
-                    )
+def serve_layout():
+    return html.Div([
+        html.Div(
+            className="header-div",
+            children=[
+                html.Div(
+                    className="app-header",
+                    children=[
+                        html.H1(
+                            children="JOB REJECTION DASHBOARD", className="title"),
+                        html.H3(
+                            children="Analyze the responses of every job I've applied to", className="sub-title"
+                        )
 
-                ]
-            ),
-            html.Button(id="refresh-btn", )]
-    ),
-    # Boxes with Applications Sent & Rejection data
-    html.Div(
-        className="dashboard-container",
-        children=[
-            html.Div(
-                className="container-div",
-                children=[
-                    html.Div(
-                        className="container",
-                        children=[
-                            html.H3(
-                                children="Applications Sent", className="container-title"),
-                            html.P(app_count, className="container-value")
-                        ]
-                    ),
-                    html.Div(
-                        className="container",
-                        children=[
-                            html.H3(
-                                children="Rejections Received", className="container-title"),
-                            html.P(rejection_count, className="container-value", style={'color': 'red'})
-                        ]
-                    ),
-                    html.Div(
-                        className="container",
-                        children=[
-                            html.H3(
-                                children="Interview Rate", className="container-title"),
-                            html.P(response_rate, className="container-value", style={'color': 'red'})
-                        ]
-                    )
-                ]
+                    ]
+                ),
+                html.Button(id="refresh-btn", n_clicks=0)]
+        ),
+        # Boxes with Applications Sent & Rejection data
+        html.Div(
+            className="dashboard-container",
+            children=[
+                html.Div(
+                    className="container-div",
+                    children=[
+                        html.Div(
+                            className="container",
+                            children=[
+                                html.H3(
+                                    children="Applications Sent", className="container-title"),
+                                html.P(app_count,className="container-value")
+                            ]
+                        ),
+                        html.Div(
+                            className="container",
+                            children=[
+                                html.H3(
+                                    children="Rejections Received", className="container-title"),
+                                html.P(rejection_count, className="container-value", style={'color': 'red'})
+                            ]
+                        ),
+                        html.Div(
+                            className="container",
+                            children=[
+                                html.H3(
+                                    children="Interview Rate", className="container-title"),
+                                html.P(response_rate, className="container-value", style={'color': 'red'})
+                            ]
+                        )
+                    ]
 
-            ),
-            html.Div(
-                className="graph-cards",
-                children=[
-                    html.Div(
-                        children=[
-                            dcc.Graph(
-                                id="apps_per_day_graph",
-                                figure=fig,
-                                className="graph-div"
-                            ),
-                        ]
-                    ),
-                    # html.Div(
-                    #     children=[
-                    #         dcc.Graph(
-                    #             id="job_boards_pie",
-                    #             figure=fig_pie,
-                    #             className="graph-div"
-                    #         )
-                    #     ]
-                    # ),
-                    html.Div(
-                        className="graph-div",
-                        children=[
-                            dcc.Dropdown(
-                                id="coverletter_dropdown",
-                                options=[{'label': 'Interviews Received', 'value': 'initialScreeningRejection'},
-                                         {'label': 'Applications Sent', 'value': 'applicationPortal'}],
-                                value='applicationPortal',
-                                clearable=False,
-                                style={
-                                    # 'background-color':colors['background'],
-                                }
-                            ),
-                            dcc.Graph(
-                                id="new_bar"
-                            )
-                        ]
+                ),
+                html.Div(
+                    className="graph-cards",
+                    children=[
+                        html.Div(
+                            children=[
+                                dcc.Graph(
+                                    id="apps_per_day_graph",
+                                    figure=fig,
+                                    className="graph-div"
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            className="graph-div",
+                            children=[
+                                dcc.Dropdown(
+                                    id="coverletter_dropdown",
+                                    options=[{'label': 'Interviews Received', 'value': 'initialScreeningRejection'},
+                                             {'label': 'Applications Sent', 'value': 'applicationPortal'}],
+                                    value='applicationPortal',
+                                    clearable=False,
+                                ),
+                                dcc.Graph(
+                                    id="new_bar"
+                                )
+                            ]
 
-                    ),
-                    html.Div(
-                        children=[
-                            dcc.Graph(
-                                id="rejection_bar",
-                                figure=fig_bar,
-                                className="graph-div"
-                            )
-                        ]
-                    )
-                ]
-            )
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(
+                                    id="rejection_bar",
+                                    figure=fig_bar,
+                                    className="graph-div"
+                                )
+                            ]
+                        )
+                    ]
+                )
 
-        ]),
-    # Contact page at bottom of page
-    html.Div(
-        className="div-contact",
-        children=[
-            html.H3(className="copyright-title", children="Seth Polyniak\u00A9 2021"),
-            html.Ul(className="social-list", children=[
-                html.A("//Github", className="social-link", href="https://github.com/sethpoly", target="_blank"),
-                html.A("//LinkedIn", className="social-link", href="https://www.linkedin.com/in/sethpolyniak/",
-                       target="_blank"),
-                html.A("//Portfolio", className="social-link", href="https://sethpoly.com", target="_blank")
-            ])
-        ]
-    )
-])
+            ]),
 
-print(df.groupby(["applicationPortal", "initialScreeningRejection"]))
+        # Contact page at bottom of page
+        html.Div(
+            className="div-contact",
+            children=[
+                html.H3(className="copyright-title", children="Seth Polyniak\u00A9 2021"),
+                html.Ul(className="social-list", children=[
+                    html.A("//Github", className="social-link", href="https://github.com/sethpoly", target="_blank"),
+                    html.A("//LinkedIn", className="social-link", href="https://www.linkedin.com/in/sethpolyniak/",
+                           target="_blank"),
+                    html.A("//Portfolio", className="social-link", href="https://sethpoly.com", target="_blank")
+                ])
+            ]
+        )
+    ])
 
+
+app.layout = serve_layout
 
 # Callback for job board dropdown
 @app.callback(
