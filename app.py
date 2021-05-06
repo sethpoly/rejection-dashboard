@@ -1,4 +1,3 @@
-import service_account as acc
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -6,7 +5,8 @@ import dash_table
 import pandas as pd
 import plotly.express as px
 from dash.dependencies import Output, Input
-from datetime import datetime
+
+import service_account as acc
 
 # Init Dash app
 app = dash.Dash(__name__,
@@ -24,6 +24,9 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
 
+# Set graphs to static
+config = {'staticPlot': True}
+
 # Data frame for most recent rejections
 df_recent_rejects = df[(df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] > 0) & (df['daysSinceRejection'] < 10)]
 df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
@@ -39,6 +42,7 @@ app_count = len(df.index)
 rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
+
 
 fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  labels={
@@ -151,7 +155,8 @@ def serve_layout():
                                 dcc.Graph(
                                     id="apps_per_day_graph",
                                     figure=fig,
-                                    className="graph-div"
+                                    className="graph-div",
+                                    config=config
                                 ),
                             ]
                         ),
@@ -166,7 +171,8 @@ def serve_layout():
                                     clearable=False,
                                 ),
                                 dcc.Graph(
-                                    id="new_bar"
+                                    id="new_bar",
+                                    config=config
                                 )
                             ]
 
@@ -176,7 +182,8 @@ def serve_layout():
                                 dcc.Graph(
                                     id="rejection_bar",
                                     figure=fig_bar,
-                                    className="graph-div"
+                                    className="graph-div",
+                                    config=config
                                 )
                             ]
                         )
