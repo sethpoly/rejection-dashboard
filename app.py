@@ -40,9 +40,7 @@ rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
 
-# Scatter plot for number of applications sent per day
-fig = px.scatter(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
-                 size_max=60,
+fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
                  labels={
                      "x": "Date Applied",
                      "y": "Applications Per Day"
