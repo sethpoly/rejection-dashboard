@@ -276,7 +276,8 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
         paper_bgcolor=colors['background'],
         font_color=colors['text'],
         xaxis={'fixedrange': True},
-        yaxis={'fixedrange': True}
+        yaxis={'fixedrange': True},
+        dragmode=False
     )
 
     return chart
