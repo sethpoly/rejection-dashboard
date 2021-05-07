@@ -43,18 +43,19 @@ rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
 
-
 fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
-                 labels={
-                     "x": "Date Applied",
-                     "y": "Applications Per Day"
-                 },
-                 title="Applications Sent Per Day")
+              labels={
+                  "x": "Date Applied",
+                  "y": "Applications Per Day"
+              },
+              title="Applications Sent Per Day")
 
 fig.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
-    font_color=colors['text']
+    font_color=colors['text'],
+    xaxis={'fixedrange': True},
+    yaxis={'fixedrange': True}
 )
 
 # Pie chart with job portals
@@ -66,7 +67,9 @@ fig_pie = px.pie(df, values=df.groupby(['applicationPortal']).size(), names=port
 fig_pie.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
-    font_color=colors['text']
+    font_color=colors['text'],
+    xaxis = {'fixedrange': True},
+    yaxis = {'fixedrange': True}
 )
 
 # Bar chart for correlation between Coverletter/Rejections
@@ -90,7 +93,9 @@ fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color=
 fig_bar.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
-    font_color=colors['text']
+    font_color=colors['text'],
+    xaxis={'fixedrange': True},
+    yaxis={'fixedrange': True}
 )
 
 
@@ -147,6 +152,7 @@ def serve_layout():
                     ]
 
                 ),
+                # Start of graphs ------------------------------------------------------------------
                 html.Div(
                     className="graph-cards",
                     children=[
@@ -156,7 +162,6 @@ def serve_layout():
                                     id="apps_per_day_graph",
                                     figure=fig,
                                     className="graph-div",
-                                    config=config
                                 ),
                             ]
                         ),
@@ -171,8 +176,7 @@ def serve_layout():
                                     clearable=False,
                                 ),
                                 dcc.Graph(
-                                    id="new_bar",
-                                    config=config
+                                    id="new_bar"
                                 )
                             ]
 
@@ -182,8 +186,7 @@ def serve_layout():
                                 dcc.Graph(
                                     id="rejection_bar",
                                     figure=fig_bar,
-                                    className="graph-div",
-                                    config=config
+                                    className="graph-div"
                                 )
                             ]
                         )
@@ -191,6 +194,7 @@ def serve_layout():
                 )
 
             ]),
+        # End of graphs ------------------------------------------------------------------------
         html.Div(
             className='table-div',
             children=[
@@ -267,7 +271,9 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
     chart.update_layout(
         plot_bgcolor=colors['background'],
         paper_bgcolor=colors['background'],
-        font_color=colors['text']
+        font_color=colors['text'],
+        xaxis={'fixedrange': True},
+        yaxis={'fixedrange': True}
     )
 
     return chart
