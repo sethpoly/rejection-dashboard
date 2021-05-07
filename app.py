@@ -111,7 +111,7 @@ def serve_layout():
                         html.H1(
                             children="JOB REJECTION DASHBOARD", className="title"),
                         html.H3(
-                            children="Analyze the responses of every job I've applied to", className="sub-title"
+                            children="Analyze data about my applications, responses, and interviews.", className="sub-title"
                         )
 
                     ]
