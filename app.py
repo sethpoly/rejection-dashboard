@@ -55,7 +55,8 @@ fig.update_layout(
     paper_bgcolor=colors['background'],
     font_color=colors['text'],
     xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True}
+    yaxis={'fixedrange': True},
+    dragmode=False
 )
 
 # Pie chart with job portals
@@ -68,9 +69,9 @@ fig_pie.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
     font_color=colors['text'],
-    xaxis = {'fixedrange': True},
-    yaxis = {'fixedrange': True}
-)
+    xaxis={'fixedrange': True},
+    yaxis={'fixedrange': True},
+    dragmode=False)
 
 # Bar chart for correlation between Coverletter/Rejections
 #
@@ -95,7 +96,8 @@ fig_bar.update_layout(
     paper_bgcolor=colors['background'],
     font_color=colors['text'],
     xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True}
+    yaxis={'fixedrange': True},
+    dragmode=False
 )
 
 
@@ -111,7 +113,8 @@ def serve_layout():
                         html.H1(
                             children="JOB REJECTION DASHBOARD", className="title"),
                         html.H3(
-                            children="Analyze data about my applications, responses, and interviews.", className="sub-title"
+                            children="Analyze data about my applications, responses, and interviews.",
+                            className="sub-title"
                         )
 
                     ]
