@@ -207,8 +207,8 @@ def serve_layout():
                     data=df_recent_rejects.to_dict('records'),
                     columns=[
                         {"name": "Company", "id": "Company"},
-                        {"name": 'dateRejected', "id": 'dateRejected'},
-                        {"name": "withCoverLetter", "id": "withCoverLetter"}
+                        {"name": 'Date', "id": 'dateRejected'},
+                        {"name": "Coverletter", "id": "withCoverLetter"}
                     ],
                     style_as_list_view=True,
                     style_header={'backgroundColor': 'rgb(10, 10, 10)',
