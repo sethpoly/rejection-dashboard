@@ -211,14 +211,15 @@ def serve_layout():
                         {"name": "withCoverLetter", "id": "withCoverLetter"}
                     ],
                     style_as_list_view=True,
-                    style_header={'backgroundColor': 'rgb(30, 30, 30)',
-                                  'border': '1px solid gray'},
+                    style_header={'backgroundColor': 'rgb(10, 10, 10)',
+                                  'border': 'none'},
                     style_data={
                         'border': '1px solid gray'
                     },
                     style_cell={
                         'backgroundColor': '#1f1f1f',
-                        'color': 'white'
+                        'color': 'white',
+                        'textAlign': 'left'
 
                     },
                     editable=False
