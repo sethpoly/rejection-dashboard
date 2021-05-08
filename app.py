@@ -219,7 +219,8 @@ def serve_layout():
                     style_cell={
                         'backgroundColor': '#1f1f1f',
                         'color': 'white',
-                        'textAlign': 'left'
+                        'textAlign': 'left',
+                        'font-size': '12px'
 
                     },
                     editable=False
