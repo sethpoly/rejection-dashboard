@@ -5,6 +5,7 @@ import dash_table
 import pandas as pd
 import plotly.express as px
 from dash.dependencies import Output, Input
+import plotly.graph_objects as go
 
 import service_account as acc
 
@@ -59,7 +60,7 @@ fig.update_layout(
     dragmode=False
 )
 
-# Pie chart with job portals
+# Bar chart with job portals
 portal_names = df['applicationPortal'].unique()
 portal_names.sort()
 fig_pie = px.pie(df, values=df.groupby(['applicationPortal']).size(), names=portal_names
@@ -73,14 +74,14 @@ fig_pie.update_layout(
     yaxis={'fixedrange': True},
     dragmode=False)
 
-# Bar chart for correlation between Coverletter/Rejections
 #
-# total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
-# coverletter_total = df[df["withCoverLetter"] == 'TRUE'].shape[0]
-# coverletter_true = df_coverletter[df["withCoverLetter"] == 'TRUE'].shape[0]
-# print(f'Total apps sent with cover letters: {coverletter_total}')
+total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
+coverletter_total = df[df["withCoverLetter"] == 'TRUE'].shape[0]
+# coverletter_true = total_screening_clears[df["withCoverLetter"] == 'TRUE'].shape[0]
+print(f'Total apps sent with cover letters: {coverletter_total}')
 # print(f'With cover letter & passed screening: {coverletter_true}')
 
+# Bar chart for correlation between Coverletter/Rejections
 df_passed_screening = df[df["initialScreeningRejection"] == 'FALSE']
 dfg = df_passed_screening.groupby('withCoverLetter').count().reset_index()
 # coverletter_ratio = df_coverletter.shape[0] / df[df["withCoverLetter"] == 'TRUE'].shape[0]
@@ -99,6 +100,16 @@ fig_bar.update_layout(
     yaxis={'fixedrange': True},
     dragmode=False
 )
+
+# Bullet graph to show correlation between total cover letters attached to interviews received
+fig_bullet = go.Figure(go.Indicator(
+    mode="number+delta", value=
+    (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100,
+    number={'suffix': "%"},
+    domain={"x": [0.1, 1], 'y': [0, 1]},
+    title={'text': "<b>Title</b>"},
+    delta={'reference': coverletter_total}
+))
 
 
 # Define layout property of app
@@ -189,6 +200,15 @@ def serve_layout():
                                 dcc.Graph(
                                     id="rejection_bar",
                                     figure=fig_bar,
+                                    className="graph-div"
+                                )
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(
+                                    id="cover_bullet",
+                                    figure=fig_bullet,
                                     className="graph-div"
                                 )
                             ]
