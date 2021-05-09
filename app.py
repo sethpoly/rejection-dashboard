@@ -74,18 +74,15 @@ fig_pie.update_layout(
     yaxis={'fixedrange': True},
     dragmode=False)
 
-#
+# Ratio vars for coverletters
 total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
 coverletter_total = df[df["withCoverLetter"] == 'TRUE'].shape[0]
-# coverletter_true = total_screening_clears[df["withCoverLetter"] == 'TRUE'].shape[0]
-# print(f'Total apps sent with cover letters: {coverletter_total}')
-# print(f'With cover letter & passed screening: {coverletter_true}')
+no_coverletter_total = df[df["withCoverLetter"] == 'FALSE'].shape[0]
 
 # Bar chart for correlation between Coverletter/Rejections
 df_passed_screening = df[df["initialScreeningRejection"] == 'FALSE']
 dfg = df_passed_screening.groupby('withCoverLetter').count().reset_index()
-# coverletter_ratio = df_coverletter.shape[0] / df[df["withCoverLetter"] == 'TRUE'].shape[0]
-# print(f'Cover letter Ratio: {coverletter_ratio}')
+
 fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color="withCoverLetter",
                  title="Applications With Cover Letter",
                  labels={
@@ -103,12 +100,13 @@ fig_bar.update_layout(
 
 # Bullet graph to show correlation between total cover letters attached to interviews received
 fig_bullet = go.Figure(go.Indicator(
-    mode="number+delta", value=
+    mode="number+delta+gauge", value=
     (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100,
+    gauge={'axis': {'range': [None, coverletter_total]}},
     number={'suffix': "%"},
     domain={"x": [0.1, 1], 'y': [0, 1]},
     title={'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
-    delta={'reference': coverletter_total, 'relative': True}
+    delta={'reference': (df_passed_screening[df_passed_screening["withCoverLetter"] == 'FALSE'].shape[0] / no_coverletter_total) * 100, 'relative': True}
 ))
 fig_bullet.update_layout(
     plot_bgcolor=colors['background'],
