@@ -78,7 +78,7 @@ fig_pie.update_layout(
 total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
 coverletter_total = df[df["withCoverLetter"] == 'TRUE'].shape[0]
 # coverletter_true = total_screening_clears[df["withCoverLetter"] == 'TRUE'].shape[0]
-print(f'Total apps sent with cover letters: {coverletter_total}')
+# print(f'Total apps sent with cover letters: {coverletter_total}')
 # print(f'With cover letter & passed screening: {coverletter_true}')
 
 # Bar chart for correlation between Coverletter/Rejections
@@ -107,9 +107,17 @@ fig_bullet = go.Figure(go.Indicator(
     (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100,
     number={'suffix': "%"},
     domain={"x": [0.1, 1], 'y': [0, 1]},
-    title={'text': "<b>Title</b>"},
-    delta={'reference': coverletter_total}
+    title={'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
+    delta={'reference': coverletter_total, 'relative': True}
 ))
+fig_bullet.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background'],
+    font_color=colors['text'],
+    xaxis={'fixedrange': True},
+    yaxis={'fixedrange': True},
+    dragmode=False
+)
 
 
 # Define layout property of app

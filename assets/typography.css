@@ -87,6 +87,9 @@ input{
 .coverletter_dropdown, .VirtualizedSelectFocusedOption:hover{
     cursor: pointer;
 }
+#cover_bullet{
+
+}
 
 
 /*Data table*/
