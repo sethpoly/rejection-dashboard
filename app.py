@@ -6,7 +6,6 @@ import pandas as pd
 import plotly.express as px
 from dash.dependencies import Output, Input
 import plotly.graph_objects as go
-
 import service_account as acc
 
 # Init Dash app
@@ -26,7 +25,8 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 df = df[df.dateApplied.notnull()]
 
 # Data frame for most recent rejections
-df_recent_rejects = df[(df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
+df_recent_rejects = df[
+    (df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
 df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
 print(df_recent_rejects.head())
 
@@ -97,15 +97,18 @@ fig_bar.update_layout(
 
 # Bullet graph to show correlation between total cover letters attached to interviews received
 # Percent of interviews received from applications sent with a cover letter
-letter_correlation = (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100
+letter_correlation = (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[
+                          0] / coverletter_total) * 100
 fig_bullet = go.Figure(go.Indicator(
     mode="number+delta+gauge", value=
     letter_correlation,
     gauge={'axis': {'range': [None, coverletter_total]}},
     number={'suffix': "%"},
     domain={"x": [0.1, 1], 'y': [0, 1]},
-    title={'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
-    delta={'reference': (df_passed_screening[df_passed_screening["withCoverLetter"] == 'FALSE'].shape[0] / no_coverletter_total) * 100, 'relative': True}
+    title={
+        'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
+    delta={'reference': (df_passed_screening[df_passed_screening["withCoverLetter"] == 'FALSE'].shape[
+                             0] / no_coverletter_total) * 100, 'relative': True}
 ))
 fig_bullet.update_layout(
     plot_bgcolor=colors['background'],
@@ -132,7 +135,6 @@ def serve_layout():
                             children="Analyze data about my applications, responses, and interviews.",
                             className="sub-title"
                         )
-
                     ]
                 ),
                 html.Button(id="refresh-btn", n_clicks=0)]
@@ -169,7 +171,6 @@ def serve_layout():
                             ]
                         )
                     ]
-
                 ),
                 # Start of graphs ------------------------------------------------------------------
                 html.Div(
@@ -220,7 +221,6 @@ def serve_layout():
                         )
                     ]
                 )
-
             ]),
         # End of graphs ------------------------------------------------------------------------
         html.Div(
@@ -245,7 +245,6 @@ def serve_layout():
                         'color': 'white',
                         'textAlign': 'left',
                         'font-size': '12px'
-
                     }
                 )]),
 
@@ -306,6 +305,7 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
     )
 
     return chart
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
