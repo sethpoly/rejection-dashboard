@@ -25,9 +25,6 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
 
-# Set graphs to static
-config = {'staticPlot': True}
-
 # Data frame for most recent rejections
 df_recent_rejects = df[(df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
 df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
@@ -99,9 +96,11 @@ fig_bar.update_layout(
 )
 
 # Bullet graph to show correlation between total cover letters attached to interviews received
+# Percent of interviews received from applications sent with a cover letter
+letter_correlation = (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100
 fig_bullet = go.Figure(go.Indicator(
     mode="number+delta+gauge", value=
-    (df_passed_screening[df_passed_screening["withCoverLetter"] == 'TRUE'].shape[0] / coverletter_total) * 100,
+    letter_correlation,
     gauge={'axis': {'range': [None, coverletter_total]}},
     number={'suffix': "%"},
     domain={"x": [0.1, 1], 'y': [0, 1]},
@@ -227,14 +226,13 @@ def serve_layout():
         html.Div(
             className='table-div',
             children=[
-                html.H1(className="data-header", children="Recent Rejections"),
                 dash_table.DataTable(
                     id='reject_table',
                     data=df_recent_rejects.to_dict('records'),
                     columns=[
                         {"name": "Company", "id": "Company"},
                         {"name": 'Date', "id": 'dateRejected'},
-                        {"name": "Coverletter", "id": "withCoverLetter"}
+                        {"name": "# Days To Respond", "id": "daysUnanswered"}
                     ],
                     style_as_list_view=True,
                     style_header={'backgroundColor': 'rgb(10, 10, 10)',
@@ -248,8 +246,7 @@ def serve_layout():
                         'textAlign': 'left',
                         'font-size': '12px'
 
-                    },
-                    editable=False
+                    }
                 )]),
 
         # Contact page at bottom of page
@@ -309,7 +306,6 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
     )
 
     return chart
-
 
 if __name__ == "__main__":
     app.run_server(debug=True)
