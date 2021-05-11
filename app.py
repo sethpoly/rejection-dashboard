@@ -226,6 +226,7 @@ def serve_layout():
         html.Div(
             className='table-div',
             children=[
+                html.H1(className="data-header", children="Recent Rejections"),
                 dash_table.DataTable(
                     id='reject_table',
                     data=df_recent_rejects.to_dict('records'),
