@@ -35,6 +35,19 @@ colors = {
     'text': '#FFF'
 }
 
+
+# Updates visual layout properties of graphs - KEEP CONSISTENT
+def update_layout(graph):
+    graph.update_layout(
+        plot_bgcolor=colors['background'],
+        paper_bgcolor=colors['background'],
+        font_color=colors['text'],
+        xaxis={'fixedrange': True},
+        yaxis={'fixedrange': True},
+        dragmode=False
+    )
+
+
 # Get data for Apps Sent/Rejection containers
 app_count = len(df.index)
 rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
@@ -48,28 +61,12 @@ fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).si
               },
               title="Applications Sent Per Day")
 
-fig.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text'],
-    xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True},
-    dragmode=False
-)
 
 # Bar chart with job portals
 portal_names = df['applicationPortal'].unique()
 portal_names.sort()
 fig_pie = px.pie(df, values=df.groupby(['applicationPortal']).size(), names=portal_names
                  , title="Job Boards Used")
-
-fig_pie.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text'],
-    xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True},
-    dragmode=False)
 
 # Ratio vars for coverletters
 total_screening_clears = df[df["initialScreeningRejection"] == 'FALSE'].shape[0]
@@ -86,14 +83,6 @@ fig_bar = px.bar(dfg, x="withCoverLetter", y='initialScreeningRejection', color=
                      "withCoverLetter": "Cover Letter Attached",
                      "initialScreeningRejection": "Interviews Received"
                  })
-fig_bar.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text'],
-    xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True},
-    dragmode=False
-)
 
 # Bullet graph to show correlation between total cover letters attached to interviews received
 # Percent of interviews received from applications sent with a cover letter
@@ -118,47 +107,20 @@ def create_bullet(value, mode, max_range, title, reference):
     ))
 
 
-# Updates visual layout properties of graphs - KEEP CONSISTENT
-def update_layout(graph):
-    graph.update_layout(
-        plot_bgcolor=colors['background'],
-        paper_bgcolor=colors['background'],
-        font_color=colors['text'],
-        xaxis={'fixedrange': True},
-        yaxis={'fixedrange': True},
-        dragmode=False
-    )
-
-
 # Bullet figure for correlation btwn interviews and applications with a cover letter
 fig_bullet = create_bullet(letter_correlation, 'number+delta+gauge', coverletter_total,
                            'Interview Rate With Cover Letter', letter_correlation_noletter)
-update_layout(fig_bullet)
 
 # Bullet figure for correlation btwn interviews and applications with NO cover letter
 fig_bullet_no_letter = create_bullet(letter_correlation_noletter, 'number+delta+gauge', no_coverletter_total,
-                           'Interview Rate Without Cover Letter', letter_correlation)
+                                     'Interview Rate Without Cover Letter', letter_correlation)
 
+# Set visual layout for all graphs
+update_layout(fig)
+update_layout(fig_pie)
+update_layout(fig_bar)
+update_layout(fig_bullet)
 update_layout(fig_bullet_no_letter)
-
-# fig_bullet_no_letter = go.Figure(go.Indicator(
-#     mode="number+delta+gauge", value=
-#     letter_correlation_noletter,
-#     gauge={'axis': {'range': [None, no_coverletter_total]}},
-#     number={'suffix': "%"},
-#     domain={"x": [0.1, 1], 'y': [0, 1]},
-#     title={
-#         'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate Without Cover Letter</b></span>"},
-#     delta={'reference': letter_correlation, 'relative': True}
-# ))
-# fig_bullet_no_letter.update_layout(
-#     plot_bgcolor=colors['background'],
-#     paper_bgcolor=colors['background'],
-#     font_color=colors['text'],
-#     xaxis={'fixedrange': True},
-#     yaxis={'fixedrange': True},
-#     dragmode=False
-# )
 
 
 # Define layout property of app
