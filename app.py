@@ -103,17 +103,36 @@ letter_correlation = (df_passed_screening[df_passed_screening["withCoverLetter"]
 letter_correlation_noletter = (df_passed_screening[df_passed_screening["withCoverLetter"] == 'FALSE'].shape[
                                    0] / no_coverletter_total) * 100
 
+
+# Function to create a bullet graph instance
+def create_bullet(value, mode, max_range, title, reference):
+    return go.Figure(go.Indicator(
+        mode=mode, value=
+        value,
+        gauge={'axis': {'range': [None, max_range]}},
+        number={'suffix': "%"},
+        domain={"x": [0.1, 1], 'y': [0, 1]},
+        title={
+            'text': f"<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>{title}</b></span>"},
+        delta={'reference': reference, 'relative': True}
+    ))
+
+
+
+
+fig_bullet = create_bullet(letter_correlation, 'number+delta+gauge', coverletter_total, 'Interview Rate With Cover Letter', letter_correlation_noletter)
+
 # Bullet figure for correlation btwn interviews and applications with a cover letter
-fig_bullet = go.Figure(go.Indicator(
-    mode="number+delta+gauge", value=
-    letter_correlation,
-    gauge={'axis': {'range': [None, coverletter_total]}},
-    number={'suffix': "%"},
-    domain={"x": [0.1, 1], 'y': [0, 1]},
-    title={
-        'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
-    delta={'reference': letter_correlation_noletter, 'relative': True}
-))
+# fig_bullet = go.Figure(go.Indicator(
+#     mode="number+delta+gauge", value=
+#     letter_correlation,
+#     gauge={'axis': {'range': [None, coverletter_total]}},
+#     number={'suffix': "%"},
+#     domain={"x": [0.1, 1], 'y': [0, 1]},
+#     title={
+#         'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate With Cover Letter</b></span>"},
+#     delta={'reference': letter_correlation_noletter, 'relative': True}
+# ))
 fig_bullet.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'],
