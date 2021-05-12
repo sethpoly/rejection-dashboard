@@ -117,6 +117,7 @@ def create_bullet(value, mode, max_range, title, reference):
         delta={'reference': reference, 'relative': True}
     ))
 
+
 # Updates visual layout properties of graphs - KEEP CONSISTENT
 def update_layout(graph):
     graph.update_layout(
@@ -128,29 +129,36 @@ def update_layout(graph):
         dragmode=False
     )
 
+
 # Bullet figure for correlation btwn interviews and applications with a cover letter
-fig_bullet = create_bullet(letter_correlation, 'number+delta+gauge', coverletter_total, 'Interview Rate With Cover Letter', letter_correlation_noletter)
+fig_bullet = create_bullet(letter_correlation, 'number+delta+gauge', coverletter_total,
+                           'Interview Rate With Cover Letter', letter_correlation_noletter)
 update_layout(fig_bullet)
 
 # Bullet figure for correlation btwn interviews and applications with NO cover letter
-fig_bullet_no_letter = go.Figure(go.Indicator(
-    mode="number+delta+gauge", value=
-    letter_correlation_noletter,
-    gauge={'axis': {'range': [None, no_coverletter_total]}},
-    number={'suffix': "%"},
-    domain={"x": [0.1, 1], 'y': [0, 1]},
-    title={
-        'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate Without Cover Letter</b></span>"},
-    delta={'reference': letter_correlation, 'relative': True}
-))
-fig_bullet_no_letter.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'],
-    font_color=colors['text'],
-    xaxis={'fixedrange': True},
-    yaxis={'fixedrange': True},
-    dragmode=False
-)
+fig_bullet_no_letter = create_bullet(letter_correlation_noletter, 'number+delta+gauge', no_coverletter_total,
+                           'Interview Rate Without Cover Letter', letter_correlation)
+
+update_layout(fig_bullet_no_letter)
+
+# fig_bullet_no_letter = go.Figure(go.Indicator(
+#     mode="number+delta+gauge", value=
+#     letter_correlation_noletter,
+#     gauge={'axis': {'range': [None, no_coverletter_total]}},
+#     number={'suffix': "%"},
+#     domain={"x": [0.1, 1], 'y': [0, 1]},
+#     title={
+#         'text': "<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>Interview Rate Without Cover Letter</b></span>"},
+#     delta={'reference': letter_correlation, 'relative': True}
+# ))
+# fig_bullet_no_letter.update_layout(
+#     plot_bgcolor=colors['background'],
+#     paper_bgcolor=colors['background'],
+#     font_color=colors['text'],
+#     xaxis={'fixedrange': True},
+#     yaxis={'fixedrange': True},
+#     dragmode=False
+# )
 
 
 # Define layout property of app
