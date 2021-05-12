@@ -309,14 +309,7 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
                 'color': ''
             })
 
-    chart.update_layout(
-        plot_bgcolor=colors['background'],
-        paper_bgcolor=colors['background'],
-        font_color=colors['text'],
-        xaxis={'fixedrange': True},
-        yaxis={'fixedrange': True},
-        dragmode=False
-    )
+    update_layout(chart)
 
     return chart
 
