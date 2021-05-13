@@ -23,11 +23,11 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
+df.sort_values(by="daysSinceRejection", inplace=True)  # Sort rejection dates by how many days since last rejection
 
 # Data frame for most recent rejections
 df_recent_rejects = df[
     (df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
-df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
 
 colors = {
     'background': '#1f1f1f',
