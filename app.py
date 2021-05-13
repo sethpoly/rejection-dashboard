@@ -28,7 +28,6 @@ df = df[df.dateApplied.notnull()]
 df_recent_rejects = df[
     (df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
 df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
-print(df_recent_rejects.head())
 
 colors = {
     'background': '#1f1f1f',
