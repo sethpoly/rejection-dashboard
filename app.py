@@ -174,6 +174,14 @@ def serve_layout():
                                     children="Interview Rate", className="container-title"),
                                 html.P(response_rate, className="container-value", style={'color': 'red'})
                             ]
+                        ),
+                        html.Div(
+                            className="container",
+                            children=[
+                                html.H3(
+                                    children="First Round Interviews", className="container-title"),
+                                html.P(first_rounds, className="container-value")
+                            ]
                         )
                     ]
                 ),
