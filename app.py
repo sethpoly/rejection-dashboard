@@ -53,7 +53,9 @@ app_count = len(df.index)
 rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
+first_rounds = df[df["initialScreeningRejection"] == 'FALSE'].shape[0] # Initial resume screen passing count
 
+# Applications sent per day Line graph
 fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
               labels={
                   "x": "Date Applied",
