@@ -205,7 +205,7 @@ def serve_layout():
                                     id="coverletter_dropdown",
                                     options=[{'label': 'Interviews Received', 'value': 'initialScreeningRejection'},
                                              {'label': 'Applications Sent', 'value': 'applicationPortal'}],
-                                    value='applicationPortal',
+                                    value='initialScreeningRejection',
                                     clearable=False,
                                 ),
                                 dcc.Graph(
