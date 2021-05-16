@@ -23,12 +23,12 @@ df["dateApplied"] = pd.to_datetime(df["dateApplied"], infer_datetime_format=True
 
 # Drop null values from df
 df = df[df.dateApplied.notnull()]
-#df.sort_values(by="daysSinceRejection", inplace=True)  # Sort rejection dates by how many days since last rejection
+df.sort_values(by="daysSinceRejection", inplace=True)  # Sort rejection dates by how many days since last rejection
 
 # Data frame for most recent rejections
 df_recent_rejects = df[
     (df["wasRejected"] == 'TRUE') & (df['daysSinceRejection'] >= 0) & (df['daysSinceRejection'] < 10)]
-df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
+#df_recent_rejects.sort_values(by="daysSinceRejection", inplace=True)
 
 colors = {
     'background': '#1f1f1f',
@@ -54,6 +54,9 @@ rejection_count = df[df["wasRejected"] == 'TRUE'].shape[0]
 response_rate = (df[df["initialScreeningRejection"] == 'FALSE'].shape[0] / app_count)  # Calculate response rate
 response_rate = "{:.2%}".format(response_rate)  # Convert to percent
 first_rounds = df[df["initialScreeningRejection"] == 'FALSE'].shape[0] # Initial resume screen passing count
+
+# Sort rejection dates by date
+df.sort_values(by="dateApplied", inplace=True)
 
 # Applications sent per day Line graph
 fig = px.line(df, x=df["dateApplied"].unique(), y=df.groupby(['dateApplied']).size(),
@@ -123,6 +126,9 @@ update_layout(fig_pie)
 update_layout(fig_bar)
 update_layout(fig_bullet)
 update_layout(fig_bullet_no_letter)
+
+# Sort rejection dates by how many days since last rejection - FOR DATA TABLE
+df.sort_values(by="daysSinceRejection", inplace=True)
 
 
 # Define layout property of app
