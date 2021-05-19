@@ -140,7 +140,7 @@ def serve_layout():
                     className="app-header",
                     children=[
                         html.H1(
-                            children="JOB REJECTION DASHBOARD", className="title"),
+                            children="JOB APPLICATION DASHBOARD", className="title"),
                         html.H3(
                             children="Analyze data about my applications, responses, and interviews.",
                             className="sub-title"
