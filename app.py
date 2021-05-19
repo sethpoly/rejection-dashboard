@@ -271,7 +271,7 @@ def serve_layout():
                     style_cell={
                         'backgroundColor': '#1f1f1f',
                         'color': 'white',
-                        'textAlign': 'left',
+                        'textAlign': 'center',
                         'font-size': '12px'
                     }
                 )]),
