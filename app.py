@@ -293,7 +293,7 @@ def serve_layout():
 
 
 app.layout = serve_layout
-app.title = 'Rejection Dashboard'
+app.title = 'Application Dashboard'
 
 
 # Callback for job board dropdown
