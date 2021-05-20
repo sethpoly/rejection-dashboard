@@ -106,7 +106,7 @@ def create_bullet(value, mode, max_range, title, reference):
         number={'suffix': "%"},
         domain={"x": [0.1, 1], 'y': [0, 1]},
         title={
-            'text': f"<span style='width:90%;margin: 0 auto;text-align:center;font-size:16px'><b>{title}</b></span>"},
+            'text': f"<span style='width:90%;margin: 0 auto;text-align:center;font-size:14px'><b>{title}</b></span>"},
         delta={'reference': reference, 'relative': True}
     ))
 

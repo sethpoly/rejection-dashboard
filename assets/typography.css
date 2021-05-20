@@ -37,7 +37,7 @@ body {
 }
 .dashboard-container{
     width: 90%;
-    height: auto;
+    
     margin: 0 auto;
     margin-bottom: 75px;
 }
@@ -171,6 +171,7 @@ input{
         font-size: 18px;
     }
     .table-div{
-        width: 90%;
+        width: 95%;
+
     }
 }
