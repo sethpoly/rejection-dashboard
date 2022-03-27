@@ -1,5 +1,5 @@
 # rejection-dashboard
-View at: https://sethpoly/rejectiondash.com
+View at: https://sethpoly/rejectiondash
 
 Interactive dashboard to visualize data about all my job applications, responses, interviews, resumes, and anything job-search related.
 
