@@ -1,1 +1,5 @@
 google_key.json
+.app.py.swp
+Pipfile.lock
+.idea/
+__pycache__/
