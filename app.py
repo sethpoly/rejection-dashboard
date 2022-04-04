@@ -9,9 +9,19 @@ import plotly.graph_objects as go
 import service_account as acc
 
 # Init Dash app
-app = dash.Dash(__name__,
+app = dash.Dash(__name__, requests_pathname_prefix='/rejectiondash/',
                 meta_tags=
                 [{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
+
+@app.server.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 # Connect to sheets API and retrieve latest sheet
 data = acc.Spreadsheet('Applications', 'Main').sheet
@@ -330,4 +340,4 @@ def build_graph(coverletter_dropdown):  # Param refers to inputs
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8052)
